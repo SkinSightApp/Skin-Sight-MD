@@ -4,14 +4,24 @@ data class LoginDataAccount(
     var email: String,
     var password: String
 )
-data class LoginResult(
-    var userId: String,
-    var name: String,
-    var token: String
-)
 data class ResponseLogin(
-    var error: Boolean,
+    var status: String,
     var message: String,
-    var loginResult: LoginResult
+    var data: LoginResult
+)
+data class LoginResult(
+    var token: String,
+)
+
+data class RegisterDataAccount(
+    var name: String,
+    var email: String,
+    var password: String
+)
+data class ResponseRegister(
+    var status: String,
+    var message: String,
+    var userId : String
+
 )
 

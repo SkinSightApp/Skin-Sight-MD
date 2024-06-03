@@ -19,7 +19,8 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "API_URL", "\"API-ENDPOINT\"")
+            buildConfigField("String", "API_URL", "\"https://skinsight-api-bvph3lxx3q-et.a.run.app/\"")
+            buildConfigField("String", "API_KEY", "\"rJfLaVasRgkg8mdLYqX46bWI7EuSW6WT\"")
         }
         release {
             isMinifyEnabled = false
@@ -27,7 +28,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_URL", "\"API-ENDPOINT\"")
+            buildConfigField("String", "API_URL", "\"https://skinsight-api-bvph3lxx3q-et.a.run.app/\"")
+            buildConfigField("String", "API_KEY", "\"rJfLaVasRgkg8mdLYqX46bWI7EuSW6WT\"")
         }
     }
     compileOptions {
