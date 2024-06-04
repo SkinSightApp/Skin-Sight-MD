@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Skin Sight</string>
-
     <string name="mustMoreThanEightCharacter">Password must be at least 8 characters long</string>
     <string name="passwordMissMatch">Passwords do not match.</string>
+    <string name="signup">Lengkapi Data Diri</string>
+    <string name="name_field">Name</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
+    <string name="confirm_password_field">Confirm Password</string>
+    <string name="show_password_button">Show Password</string>
+    <string name="register_field">Register</string>
+    <string name="login">Masuk ke akun\nKamu</string>
+    <string name="register_button">Register</string>
 </resources>

@@ -7,24 +7,62 @@
     android:layout_height="match_parent"
     tools:context=".activities.register.RegisterActivity">
 
-
-    <com.dicoding.sub1.customview.CustomNameView
-        android:id="@+id/cvName"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="128dp"
-        android:hint="Name"
+    <TextView
+        android:id="@+id/signupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:text="@string/signup"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="130dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/divider_rounded_edge"
+        app:layout_constraintEnd_toEndOf="@+id/signupText"
+        app:layout_constraintStart_toStartOf="@+id/signupText"
+        app:layout_constraintTop_toBottomOf="@+id/signupText" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="30dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/divider_rounded_edge"
+        app:layout_constraintStart_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/signupText" />
+
+
+    <com.dicoding.sub1.customview.CustomNameView
+        android:id="@+id/cvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:hint="@string/name_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupText" />
+
     <com.dicoding.sub1.customview.CustomEmailView
         android:id="@+id/cvEmail"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="36dp"
-        android:hint="Email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:hint="@string/email_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +70,13 @@
 
     <com.dicoding.sub1.customview.CustomPasswordView
         android:id="@+id/cvPassword"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="24dp"
-        android:hint="Password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:hint="@string/password_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +84,13 @@
 
     <com.dicoding.sub1.customview.CustomSamePasswordView
         android:id="@+id/cvConfirmPassword"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="32dp"
-        android:hint="Confirm Password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:hint="@string/confirm_password_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +100,7 @@
         android:id="@+id/showPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Password"
+        android:text="@string/show_password_button"
         app:layout_constraintStart_toStartOf="@+id/cvConfirmPassword"
         app:layout_constraintTop_toBottomOf="@+id/cvConfirmPassword" />
 
@@ -64,10 +108,15 @@
         android:id="@+id/btnRegisterAccount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="Register Account"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/semiLightBlue"
+        android:text="@string/register_field"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showPassword" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
