@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        handleUserPreferences()
+        handleLoginResponse()
         handleLogin()
         handelMoveToRegister()
         handleShowPassword()
@@ -63,14 +63,24 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleLoginResponse(status: String, loginViewModel: LoginViewModel) {
-        if (status == "success") {
-            showToast("You have logged in successfully!")
-            loginViewModel.saveLoginSession(true)
-            loginViewModel.saveToken(mainViewModel.userLogin.value!!.data.token)
-        }else{
-            showToast("Credentials are incorrect!")
+    private fun handleLoginResponse() {
+        val preferences = UserPreference.getInstance(dataStore)
+        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
+
+        mainViewModel.statusLogin.observe(this) { status ->
+            if (status == "success") {
+                showToast("You have logged in successfully!")
+                loginViewModel.saveLoginSession(true)
+                loginViewModel.saveToken(mainViewModel.userLogin.value!!.data.token)
+
+                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }else{
+                showToast("Credentials are incorrect!")
+            }
         }
+
     }
 
     private fun handleUserPreferences() {
@@ -83,9 +93,6 @@ class LoginActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
-        }
-        mainViewModel.statusLogin.observe(this) { status ->
-            handleLoginResponse(status, loginViewModel)
         }
     }
 
