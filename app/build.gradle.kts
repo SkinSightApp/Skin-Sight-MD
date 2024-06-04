@@ -1,6 +1,9 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
 }
 
 android {
@@ -15,21 +18,22 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // load local.properties file
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        // Set API keys in BuildConfig
+        buildConfigField("String", "API_URL", "\"${properties.getProperty("API_URL")}\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "API_URL", "\"https://skinsight-api-bvph3lxx3q-et.a.run.app/\"")
-            buildConfigField("String", "API_KEY", "\"rJfLaVasRgkg8mdLYqX46bWI7EuSW6WT\"")
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_URL", "\"https://skinsight-api-bvph3lxx3q-et.a.run.app/\"")
-            buildConfigField("String", "API_KEY", "\"rJfLaVasRgkg8mdLYqX46bWI7EuSW6WT\"")
         }
     }
     compileOptions {

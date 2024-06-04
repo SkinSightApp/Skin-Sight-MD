@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="5000"
+        motion:autoTransition="animateToEnd">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:motionTarget="@+id/tvDescription"
+                motion:framePosition="21"
+                android:alpha="1" />
+            <KeyAttribute
+                motion:motionTarget="@+id/btnLogin"
+                motion:framePosition="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/btnRegister"
+                motion:framePosition="80"
+                android:alpha="0.5" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/tvDescription"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="271dp"
+            android:layout_height="95dp"
+            motion:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/btnLogin"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="277dp"
+            android:layout_height="50dp"
+            motion:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="140dp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/btnRegister"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="277dp"
+            android:layout_height="50dp"
+            motion:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/tvDescription"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="271dp"
+            android:layout_height="95dp"
+            motion:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/btnLogin"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="277dp"
+            android:layout_height="50dp"
+            motion:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="140dp"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/btnRegister"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="277dp"
+            android:layout_height="50dp"
+            motion:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:visibility="visible" />
+    </ConstraintSet>
+</MotionScene>
