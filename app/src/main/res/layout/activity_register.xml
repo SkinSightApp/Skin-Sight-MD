@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:fontFamily="@font/nunito_semi_bold"
-        android:text="Lengkapi Data Diri"
+        android:text="@string/signup"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +49,10 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/nunito_semi_bold"
-        android:hint="Name"
+        android:hint="@string/name_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupText" />
-    />
 
     <com.dicoding.sub1.customview.CustomEmailView
         android:id="@+id/cvEmail"
@@ -63,7 +62,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/nunito_semi_bold"
-        android:hint="Email"
+        android:hint="@string/email_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/nunito_semi_bold"
-        android:hint="Password"
+        android:hint="@string/password_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +90,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/nunito_semi_bold"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +100,7 @@
         android:id="@+id/showPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Password"
+        android:text="@string/show_password_button"
         app:layout_constraintStart_toStartOf="@+id/cvConfirmPassword"
         app:layout_constraintTop_toBottomOf="@+id/cvConfirmPassword" />
 
@@ -113,7 +112,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/semiLightBlue"
-        android:text="Register"
+        android:text="@string/register_field"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
