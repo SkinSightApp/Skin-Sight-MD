@@ -22,7 +22,7 @@ import com.dicoding.skinsight.preferences.UserPreference
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var splashBinding: SplashScreenBinding
 
 
@@ -33,15 +33,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         splashBinding = SplashScreenBinding.inflate(layoutInflater)
 
+        handleSplashScreen()
+    }
 
-
+    private fun handleSplashScreen() {
         val preferences = UserPreference.getInstance(dataStore)
-        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
+        val loginViewModel =
+            ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
 
         loginViewModel.getLoginSession().observe(this) { sessionExists ->
             if (sessionExists) {
                 setContentView(splashBinding.root)
-                splashBinding.splashScreen.setTransitionListener(object : MotionLayout.TransitionListener {
+                splashBinding.splashScreen.setTransitionListener(object :
+                    MotionLayout.TransitionListener {
                     override fun onTransitionStarted(
                         motionLayout: MotionLayout?,
                         startId: Int,
@@ -58,9 +62,13 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
-                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    override fun onTransitionCompleted(
+                        motionLayout: MotionLayout?,
+                        currentId: Int
+                    ) {
                         val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
 
@@ -74,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-            }else{
+            } else {
                 setContentView(binding.root)
                 binding.main.setTransitionListener(object : MotionLayout.TransitionListener {
                     override fun onTransitionStarted(
@@ -93,7 +101,10 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
-                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    override fun onTransitionCompleted(
+                        motionLayout: MotionLayout?,
+                        currentId: Int
+                    ) {
 
                     }
 
@@ -108,86 +119,11 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
-//        handleUserPreferences()
         handelButton()
     }
 
 
-    private fun handleUserPreferences() {
-//        val preferences = UserPreference.getInstance(dataStore)
-//        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
-//
-//        loginViewModel.getLoginSession().observe(this) { sessionExists ->
-//            if (sessionExists) {
-//                splashBinding.splashScreen.setTransitionListener(object : MotionLayout.TransitionListener {
-//                    override fun onTransitionStarted(
-//                        motionLayout: MotionLayout?,
-//                        startId: Int,
-//                        endId: Int
-//                    ) {
-//                    }
-//
-//                    override fun onTransitionChange(
-//                        motionLayout: MotionLayout?,
-//                        startId: Int,
-//                        endId: Int,
-//                        progress: Float
-//                    ) {
-//
-//                    }
-//
-//                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-//                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        startActivity(intent)
-//                    }
-//
-//                    override fun onTransitionTrigger(
-//                        motionLayout: MotionLayout?,
-//                        triggerId: Int,
-//                        positive: Boolean,
-//                        progress: Float
-//                    ) {
-//
-//                    }
-//                })
-//
-//            }else{
-//                binding.main.setTransitionListener(object : MotionLayout.TransitionListener {
-//                    override fun onTransitionStarted(
-//                        motionLayout: MotionLayout?,
-//                        startId: Int,
-//                        endId: Int
-//                    ) {
-//                    }
-//
-//                    override fun onTransitionChange(
-//                        motionLayout: MotionLayout?,
-//                        startId: Int,
-//                        endId: Int,
-//                        progress: Float
-//                    ) {
-//
-//                    }
-//
-//                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-//
-//                    }
-//
-//                    override fun onTransitionTrigger(
-//                        motionLayout: MotionLayout?,
-//                        triggerId: Int,
-//                        positive: Boolean,
-//                        progress: Float
-//                    ) {
-//
-//                    }
-//                })
-//            }
-//        }
-    }
-
-    private fun handelButton(){
+    private fun handelButton() {
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

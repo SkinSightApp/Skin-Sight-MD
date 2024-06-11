@@ -31,7 +31,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/nunito_semi_bold"
         android:gravity="center_horizontal"
-        android:text="Discover Your Health Through Your Skin"
+        android:text="Your Journey to Healthier Skin Begins Here"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

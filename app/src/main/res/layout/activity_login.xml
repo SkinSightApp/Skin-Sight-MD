@@ -38,7 +38,7 @@
         app:layout_constraintStart_toEndOf="@+id/divider1"
         app:layout_constraintTop_toBottomOf="@+id/loginText" />
 
-    <com.dicoding.sub1.customview.CustomEmailView
+    <com.dicoding.skinsight.models.customview.CustomEmailView
         android:id="@+id/CVEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginText" />
 
-    <com.dicoding.sub1.customview.CustomPasswordView
+    <com.dicoding.skinsight.models.customview.CustomPasswordView
         android:id="@+id/CVPasswordLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         android:backgroundTint="@color/semiLightBlue"
         android:fontFamily="@font/nunito_semi_bold"
         android:textSize="17sp"
-        android:text="Login"
+        android:text="@string/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CVPasswordLogin" />
@@ -104,5 +104,17 @@
         app:layout_constraintTop_toBottomOf="@+id/showPassword" />
 
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:indeterminate="true"
+        android:indeterminateTint="#FFFFFF"
+        android:visibility="gone"
+        android:indeterminateTintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toTopOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

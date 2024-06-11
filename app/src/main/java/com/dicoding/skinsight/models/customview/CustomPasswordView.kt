@@ -1,4 +1,4 @@
-package com.dicoding.sub1.customview
+package com.dicoding.skinsight.models.customview
 
 import android.content.Context
 import android.graphics.Rect
