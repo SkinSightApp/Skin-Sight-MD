@@ -2,13 +2,22 @@
     <string name="app_name">Skin Sight</string>
     <string name="mustMoreThanEightCharacter">Password must be at least 8 characters long</string>
     <string name="passwordMissMatch">Passwords do not match.</string>
-    <string name="signup">Lengkapi Data Diri</string>
+    <string name="signup">Create Your Account</string>
     <string name="name_field">Name</string>
     <string name="email_field">Email</string>
     <string name="password_field">Password</string>
     <string name="confirm_password_field">Confirm Password</string>
     <string name="show_password_button">Show Password</string>
     <string name="register_field">Register</string>
-    <string name="login">Masuk ke akun\nKamu</string>
+    <string name="login">Log in to your\naccount</string>
     <string name="register_button">Register</string>
+    <string name="button_camera">Button Camera</string>
+    <string name="button_gallery">Button Gallery</string>
+    <string name="image_view_skin_detection">Image View Skin Detection</string>
+    <string name="name_cannot_be_empty">Name Cannot Be Empty</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="password_must_more_than_eight_character">Password Must More Than Eight Character</string>
+    <string name="password_does_not_match">Password Does Not Match</string>
+    <string name="please_enter_data_correctly">Please enter Data Correctly</string>
+    <string name="login_button">Login</string>
 </resources>

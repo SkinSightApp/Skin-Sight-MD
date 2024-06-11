@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signupText" />
 
 
-    <com.dicoding.sub1.customview.CustomNameView
+    <com.dicoding.skinsight.models.customview.CustomNameView
         android:id="@+id/cvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupText" />
 
-    <com.dicoding.sub1.customview.CustomEmailView
+    <com.dicoding.skinsight.models.customview.CustomEmailView
         android:id="@+id/cvEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvName" />
 
-    <com.dicoding.sub1.customview.CustomPasswordView
+    <com.dicoding.skinsight.models.customview.CustomPasswordView
         android:id="@+id/cvPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvEmail" />
 
-    <com.dicoding.sub1.customview.CustomSamePasswordView
+    <com.dicoding.skinsight.models.customview.CustomSamePasswordView
         android:id="@+id/cvConfirmPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

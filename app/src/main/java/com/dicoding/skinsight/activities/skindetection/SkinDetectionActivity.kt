@@ -56,13 +56,21 @@ class SkinDetectionActivity : AppCompatActivity() {
             val myFile = File(currentPhotoPath)
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
-            val resizedBitmap = resizeBitmap(result, dpToPx(300, this), dpToPx(300, this))
-
+            val resizedBitmap = Bitmap.createScaledBitmap(result, 350, 500, true)
+            val roundedBitmap = getRoundedCornerBitmap(resizedBitmap, 20)
             anyPhoto = true
-            binding.ivSkinDetection.setImageBitmap(resizedBitmap)
-            binding.ivSkinDetection.visibility = View.VISIBLE
-            binding.btnCamera.visibility = View.GONE
-            binding.btnGallery.visibility = View.GONE
+            with(binding) {
+                ivSkinDetection.apply {
+                    setImageBitmap(roundedBitmap)
+                    visibility = View.VISIBLE
+                }
+                btnCamera.visibility = View.GONE
+                btnGallery.visibility = View.GONE
+                tvCamera.visibility = View.GONE
+                tvGalery.visibility = View.GONE
+                btnCheckSkin.visibility = View.VISIBLE
+            }
+
         }
     }
 
@@ -115,12 +123,22 @@ class SkinDetectionActivity : AppCompatActivity() {
             getFile = myFile
             val inputStream = contentResolver.openInputStream(selectedImg)
             val bitmap = BitmapFactory.decodeStream(inputStream)
-            val resizedBitmap = resizeBitmap(bitmap, dpToPx(300, this), dpToPx(300, this))
 
-            binding.ivSkinDetection.setImageBitmap(resizedBitmap)
-            binding.ivSkinDetection.visibility = View.VISIBLE
-            binding.btnCamera.visibility = View.GONE
-            binding.btnGallery.visibility = View.GONE
+            val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 350, 500, true)
+            val roundedBitmap = getRoundedCornerBitmap(resizedBitmap, 20)
+
+            with(binding) {
+                ivSkinDetection.apply {
+                    setImageBitmap(roundedBitmap)
+                    visibility = View.VISIBLE
+                }
+                btnCamera.visibility = View.GONE
+                btnGallery.visibility = View.GONE
+                tvCamera.visibility = View.GONE
+                tvGalery.visibility = View.GONE
+                btnCheckSkin.visibility = View.VISIBLE
+            }
+
         }
     }
 
@@ -132,8 +150,21 @@ class SkinDetectionActivity : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-    private fun resizeBitmap(source: Bitmap, width: Int, height: Int): Bitmap {
-        return Bitmap.createScaledBitmap(source, width, height, true)
+    private fun getRoundedCornerBitmap(bitmap: Bitmap, radius: Int): Bitmap {
+        val output = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(output)
+        val color = -0xbdbdbe
+        val paint = android.graphics.Paint()
+        val rect = android.graphics.Rect(0, 0, bitmap.width, bitmap.height)
+        val rectF = android.graphics.RectF(rect)
+        val roundPx = radius.toFloat()
+        paint.isAntiAlias = true
+        canvas.drawARGB(0, 0, 0, 0)
+        paint.color = color
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint)
+        paint.xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
+        canvas.drawBitmap(bitmap, rect, rect, paint)
+        return output
     }
 
     private fun dpToPx(dp: Int, context: Context): Int {

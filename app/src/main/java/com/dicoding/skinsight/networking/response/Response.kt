@@ -25,3 +25,20 @@ data class ResponseRegister(
 
 )
 
+data class ProfileDataAccount(
+    var status: String,
+    var message: String,
+    var data: ProfileData
+)
+
+data class ProfileData(
+    var user: User
+)
+
+data class User(
+    var createdAt: String,
+    var password: String,
+    var name: String,
+    var email: String,
+    var updatedAt: String
+)

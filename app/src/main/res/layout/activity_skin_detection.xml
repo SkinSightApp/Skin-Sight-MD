@@ -5,69 +5,122 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_circle"
     tools:context=".activities.skindetection.SkinDetectionActivity">
 
+
+    <ImageView
+        android:id="@+id/ivSkinDetection"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/rounded_imageview"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDeteksiPenyakit" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvDeteksiPenyakit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Deteksi Penyakit Kulit"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Deteksi Penyakit"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="64dp"
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="80dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/divider_rounded_edge"
+        app:layout_constraintStart_toStartOf="@+id/tvDeteksiPenyakit"
+        app:layout_constraintTop_toBottomOf="@+id/tvDeteksiPenyakit" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="8dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/divider_rounded_edge"
+        app:layout_constraintStart_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/divider1" />
+
+
+    <ImageButton
+        android:id="@+id/btnGallery"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/rounded_button"
+        android:contentDescription="@string/button_gallery"
+        android:src="@drawable/baseline_photo_library_24"
+        android:scaleType="fitCenter"
+        android:padding="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintTop_toBottomOf="@+id/divider1"
+        app:layout_constraintVertical_bias="0.193" />
+
+    <ImageButton
+        android:id="@+id/btnCamera"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="36dp"
+        android:background="@drawable/rounded_button"
+        android:contentDescription="@string/button_camera"
+        android:src="@drawable/baseline_camera_alt_24"
+        android:scaleType="fitCenter"
+        android:padding="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/btnCamera"
-                android:layout_width="102dp"
-                android:layout_height="98dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.500"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
-
-            <ImageButton
-                android:id="@+id/btnGallery"
-                android:layout_width="102dp"
-                android:layout_height="98dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.500"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
-
-            <ImageView
-                android:id="@+id/ivSkinDetection"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"
-                android:visibility="gone"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/divider1"
+        app:layout_constraintVertical_bias="0.193" />
 
 
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tvCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Camera"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCamera"
+        app:layout_constraintEnd_toEndOf="@+id/btnCamera"
+        app:layout_constraintStart_toStartOf="@+id/btnCamera"
+        app:layout_constraintTop_toTopOf="@+id/btnCamera"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvGalery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Galery"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGallery"
+        app:layout_constraintEnd_toEndOf="@+id/btnGallery"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@+id/btnGallery"
+        app:layout_constraintTop_toTopOf="@+id/btnGallery"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnCheckSkin"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Check"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivSkinDetection" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

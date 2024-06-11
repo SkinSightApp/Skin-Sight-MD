@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.skinsight.R
 import com.dicoding.skinsight.activities.home.HomeActivity
 import com.dicoding.skinsight.activities.register.RegisterActivity
 import com.dicoding.skinsight.databinding.ActivityLoginBinding
@@ -45,10 +48,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLogin(){
+        mainViewModel.isLoadingLogin.observe(this) { loading ->
+            handelLoading(loading)
+        }
+
         binding.btnLogin.setOnClickListener {
+            Log.d("LoginActivity", "Login button clicked")
             binding.CVEmail.clearFocus()
             binding.CVPasswordLogin.clearFocus()
-
             if (isDataValid()) {
                 val requestLogin = LoginDataAccount(
                     binding.CVEmail.text.toString().trim(),
@@ -68,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
         val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
 
         mainViewModel.statusLogin.observe(this) { status ->
-            if (status == "success") {
-                showToast("You have logged in successfully!")
+            if (status == "success"){
+                mainViewModel.userLogin.value?.let { showToast(it.message) }
                 loginViewModel.saveLoginSession(true)
                 loginViewModel.saveToken(mainViewModel.userLogin.value!!.data.token)
 
@@ -77,24 +84,12 @@ class LoginActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }else{
-                showToast("Credentials are incorrect!")
+                showToast("Credentials are invalid")
             }
         }
 
     }
 
-    private fun handleUserPreferences() {
-        val preferences = UserPreference.getInstance(dataStore)
-        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
-
-        loginViewModel.getLoginSession().observe(this) { sessionExists ->
-            if (sessionExists) {
-                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-        }
-    }
 
     private fun handelMoveToRegister(){
         binding.btnRegister.setOnClickListener {
@@ -116,5 +111,10 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun handelLoading(loading : Boolean) {
+        binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+        binding.btnLogin.text = if (loading) "" else "Login"
     }
 }
