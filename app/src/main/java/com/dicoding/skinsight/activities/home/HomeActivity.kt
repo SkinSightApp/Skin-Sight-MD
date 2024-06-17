@@ -41,6 +41,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        comingUpFeature()
+
 
     }
 
@@ -73,5 +75,20 @@ class HomeActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+    }
+
+    private fun comingUpFeature() {
+        val buttonClickListener = View.OnClickListener { view ->
+            when (view.id) {
+                R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4 -> {
+                    Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        binding.btn1.setOnClickListener(buttonClickListener)
+        binding.btn2.setOnClickListener(buttonClickListener)
+        binding.btn3.setOnClickListener(buttonClickListener)
+        binding.btn4.setOnClickListener(buttonClickListener)
+
     }
 }

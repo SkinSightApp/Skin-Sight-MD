@@ -28,8 +28,8 @@
         android:layout_marginTop="65dp"
         android:fontFamily="@font/nunito_semi_bold"
         android:text="UserName"
-        android:visibility="invisible"
         android:textSize="25sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,20 +57,55 @@
         app:layout_constraintStart_toStartOf="@+id/tvSkinSight"
         app:layout_constraintTop_toBottomOf="@+id/tvSkinSight" />
 
+
     <Button
         android:id="@+id/btnSkinDetection"
         android:layout_width="350dp"
         android:layout_height="120dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/gradient_button"
-        android:text="Skin Detection\nCheck your facial skin health now"
         android:gravity="start|center_vertical"
-        android:paddingStart="16dp"
         app:backgroundTint="@null"
+        app:layout_constraintBaseline_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
+    <TextView
+        android:id="@+id/tvSkinDetection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Skin Detection"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSkinDetection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSkinDetection"
+        app:layout_constraintVertical_bias="0.291" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Check your facial skin health now"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/tvSkinDetection"
+        app:layout_constraintTop_toBottomOf="@+id/tvSkinDetection" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/face"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSkinDetection"
+        app:layout_constraintEnd_toEndOf="@+id/btnSkinDetection"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toEndOf="@+id/tvSkinDetection"
+        app:layout_constraintTop_toTopOf="@+id/btnSkinDetection" />
 
     <Button
         android:id="@+id/btnCatalogue"
@@ -84,6 +119,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSkinDetection" />
 
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/square_button"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="@+id/btnCatalogue"
+        app:layout_constraintTop_toBottomOf="@+id/btnCatalogue" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/square_button"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/btn3"
+        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintStart_toEndOf="@+id/btn1"
+        app:layout_constraintTop_toBottomOf="@+id/btnCatalogue" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/square_button"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/btn4"
+        app:layout_constraintTop_toBottomOf="@+id/btnCatalogue" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/square_button"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@+id/btnCatalogue"
+        app:layout_constraintTop_toBottomOf="@+id/btnCatalogue" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
