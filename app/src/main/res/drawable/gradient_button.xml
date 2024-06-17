@@ -8,7 +8,7 @@
     <!-- Gradient background -->
     <gradient
         android:startColor="#0766AD"
-        android:endColor="#677DB6"
+        android:endColor="#96D0FB"
         android:angle="0"
         android:type="linear"
         android:centerX="0.6"
