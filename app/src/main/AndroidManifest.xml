@@ -31,6 +31,9 @@
         android:theme="@style/Theme.SkinSight"
         tools:targetApi="31">
         <activity
+            android:name=".activities.skindetection.ResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.skindetection.SkinDetectionActivity"
             android:exported="false" />
         <activity
@@ -61,6 +64,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

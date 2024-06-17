@@ -20,4 +20,5 @@
     <string name="password_does_not_match">Password Does Not Match</string>
     <string name="please_enter_data_correctly">Please enter Data Correctly</string>
     <string name="login_button">Login</string>
+    <string name="hello">"Hello, "</string>
 </resources>

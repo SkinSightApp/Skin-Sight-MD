@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +48,10 @@ class SkinDetectionActivity : AppCompatActivity() {
             startGallery()
         }
     }
+
+
+
+
     private var anyPhoto = false
     private lateinit var currentPhotoPath: String
     private val launcherIntentCamera = registerForActivityResult(
@@ -69,6 +74,11 @@ class SkinDetectionActivity : AppCompatActivity() {
                 tvCamera.visibility = View.GONE
                 tvGalery.visibility = View.GONE
                 btnCheckSkin.visibility = View.VISIBLE
+            }
+            binding.btnCheckSkin.setOnClickListener{
+                val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
+                intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
+                startActivity(intent)
             }
 
         }
@@ -123,7 +133,6 @@ class SkinDetectionActivity : AppCompatActivity() {
             getFile = myFile
             val inputStream = contentResolver.openInputStream(selectedImg)
             val bitmap = BitmapFactory.decodeStream(inputStream)
-
             val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 350, 500, true)
             val roundedBitmap = getRoundedCornerBitmap(resizedBitmap, 20)
 
@@ -137,6 +146,11 @@ class SkinDetectionActivity : AppCompatActivity() {
                 tvCamera.visibility = View.GONE
                 tvGalery.visibility = View.GONE
                 btnCheckSkin.visibility = View.VISIBLE
+            }
+            binding.btnCheckSkin.setOnClickListener{
+                val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
+                intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
+                startActivity(intent)
             }
 
         }
