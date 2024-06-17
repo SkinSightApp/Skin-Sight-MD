@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.skinsight.R
 import com.dicoding.skinsight.activities.login.LoginActivity
 import com.dicoding.skinsight.activities.login.dataStore
 import com.dicoding.skinsight.activities.skindetection.SkinDetectionActivity
@@ -19,13 +20,13 @@ import com.dicoding.skinsight.preferences.UserPreference
 class HomeActivity : AppCompatActivity() {
 
 
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
     private val preferences = UserPreference.getInstance(dataStore)
     private lateinit var token: String
-    private lateinit var name : String
+    private lateinit var name: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,22 +44,27 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserProfile(){
-        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
+    private fun getUserProfile() {
+        val loginViewModel =
+            ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
         loginViewModel.getToken().observe(this) {
             token = it
             mainViewModel.getProfileData(it)
         }
         mainViewModel.profile.observe(this) { user ->
             name = user.name
-            binding.tvName.text = "Hello, " + name
+            binding.tvName.text = buildString {
+                append(getString(R.string.hello))
+                append(name)
+            }
             binding.tvName.visibility = View.VISIBLE
         }
 
     }
 
-    private fun handleLogoutButton(){
-        val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
+    private fun handleLogoutButton() {
+        val loginViewModel =
+            ViewModelProvider(this, LoginViewModelFactory(preferences))[LoginViewModel::class.java]
 
         binding.btnLogout.setOnClickListener {
             loginViewModel.logout()
