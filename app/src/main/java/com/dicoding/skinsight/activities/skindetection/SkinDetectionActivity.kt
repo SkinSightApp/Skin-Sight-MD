@@ -9,13 +9,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import com.dicoding.skinsight.databinding.ActivitySkinDetectionBinding
+import com.dicoding.skinsight.models.MainViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -25,8 +28,10 @@ import java.util.Locale
 
 class SkinDetectionActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySkinDetectionBinding
-
+    private lateinit var binding: ActivitySkinDetectionBinding
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
     private var getFile: File? = null
     private lateinit var fileFinal: File
 
@@ -48,8 +53,6 @@ class SkinDetectionActivity : AppCompatActivity() {
             startGallery()
         }
     }
-
-
 
 
     private var anyPhoto = false
@@ -75,10 +78,24 @@ class SkinDetectionActivity : AppCompatActivity() {
                 tvGalery.visibility = View.GONE
                 btnCheckSkin.visibility = View.VISIBLE
             }
-            binding.btnCheckSkin.setOnClickListener{
-                val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
-                intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
-                startActivity(intent)
+            binding.btnCheckSkin.setOnClickListener {
+                mainViewModel.predictionResult.observe(this) {
+                    val top2 = it.top_2
+                    val top2String = top2.entries.firstOrNull()
+                    val probability = top2String?.value ?: 0.0
+                    val formattedProbability = "${(probability * 100).toInt()}%"
+                    Toast.makeText(this, buildString {
+                        append(top2String?.key)
+                        append("With ")
+                        append(formattedProbability)
+                        append(" Probability")
+                    }, Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
+                    intent.putExtra(ResultActivity.EXTRA_PREDICTION,top2String?.key)
+                    startActivity(intent)
+                }
+
             }
 
         }
@@ -147,10 +164,25 @@ class SkinDetectionActivity : AppCompatActivity() {
                 tvGalery.visibility = View.GONE
                 btnCheckSkin.visibility = View.VISIBLE
             }
-            binding.btnCheckSkin.setOnClickListener{
-                val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
-                intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
-                startActivity(intent)
+            binding.btnCheckSkin.setOnClickListener {
+                mainViewModel.getPrediction(myFile)
+                mainViewModel.predictionResult.observe(this) {
+                    val top2 = it.top_2
+                    val top2String = top2.entries.firstOrNull()
+                    val probability = top2String?.value ?: 0.0
+                    val formattedProbability = "${(probability * 100).toInt()}%"
+                    Toast.makeText(this, buildString {
+                        append(top2String?.key)
+                        append("With ")
+                        append(formattedProbability)
+                        append(" Probability")
+                    }, Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@SkinDetectionActivity, ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
+                    intent.putExtra(ResultActivity.EXTRA_PREDICTION,top2String?.key)
+                    startActivity(intent)
+                }
+
             }
 
         }
@@ -176,7 +208,8 @@ class SkinDetectionActivity : AppCompatActivity() {
         canvas.drawARGB(0, 0, 0, 0)
         paint.color = color
         canvas.drawRoundRect(rectF, roundPx, roundPx, paint)
-        paint.xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
+        paint.xfermode =
+            android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
         canvas.drawBitmap(bitmap, rect, rect, paint)
         return output
     }

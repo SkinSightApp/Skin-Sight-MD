@@ -1,18 +1,24 @@
 package com.dicoding.skinsight.models
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.skinsight.networking.api.ApiConfig
 import com.dicoding.skinsight.networking.response.LoginDataAccount
+import com.dicoding.skinsight.networking.response.PredictionData
+import com.dicoding.skinsight.networking.response.PredictionResponse
 import com.dicoding.skinsight.networking.response.ProfileDataAccount
 import com.dicoding.skinsight.networking.response.RegisterDataAccount
 import com.dicoding.skinsight.networking.response.ResponseLogin
 import com.dicoding.skinsight.networking.response.ResponseRegister
 import com.dicoding.skinsight.networking.response.User
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
+import java.io.File
 
 class MainViewModel : ViewModel() {
     private val _isLoadingLogin = MutableLiveData<Boolean>()
@@ -63,7 +69,10 @@ class MainViewModel : ViewModel() {
         _isLoadingRegister.value = true
         val api = ApiConfig.getApiService().registerUser(registDataUser)
         api.enqueue(object : retrofit2.Callback<ResponseRegister> {
-            override fun onResponse(call: Call<ResponseRegister>, response: Response<ResponseRegister>) {
+            override fun onResponse(
+                call: Call<ResponseRegister>,
+                response: Response<ResponseRegister>
+            ) {
                 _isLoadingRegister.value = false
                 if (response.isSuccessful) {
                     isErrorRegist = false
@@ -110,4 +119,44 @@ class MainViewModel : ViewModel() {
             }
         })
     }
+
+    // LiveData for loading state
+    private val _isLoadingPredict = MutableLiveData<Boolean>()
+    val isLoadingPredict: LiveData<Boolean> = _isLoadingPredict
+
+    // LiveData for error state
+    private val _isErrorPredict = MutableLiveData<Boolean>()
+    val isErrorPredict: LiveData<Boolean> = _isErrorPredict
+
+    // LiveData for prediction result
+    private val _predictionResult = MutableLiveData<PredictionData>()
+    val predictionResult: LiveData<PredictionData> = _predictionResult
+    fun getPrediction(file : File){
+        val api = ApiConfig.getApiServicePredict().predict(
+            MultipartBody.Part.createFormData(
+                "file",
+                file.name,
+                file.asRequestBody("image/*".toMediaTypeOrNull())
+            ))
+        api.enqueue(object : retrofit2.Callback<PredictionResponse> {
+            override fun onResponse(
+                call: Call<PredictionResponse>,
+                response: Response<PredictionResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        _predictionResult.value = responseBody.data
+                    }else{
+                        Log.d("Prediction Status", "Failed")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<PredictionResponse>, t: Throwable) {
+                println("Error: ${t.message}")
+            }
+        })
+    }
+
 }

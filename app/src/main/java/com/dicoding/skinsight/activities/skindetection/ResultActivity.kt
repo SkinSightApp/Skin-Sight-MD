@@ -9,8 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.skinsight.R
 import com.dicoding.skinsight.databinding.ActivityResultBinding
+import com.dicoding.skinsight.models.adapter.DrugAdapter
+import com.dicoding.skinsight.models.adapter.DrugAdapterDummyData
+import com.dicoding.skinsight.networking.response.Product
 
 class ResultActivity : AppCompatActivity() {
 
@@ -23,9 +27,38 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setIntentImage()
+        setupRecyclerView()
+        setupPrediction()
 
     }
+    private fun setupPrediction(){
+        val prediction = intent.getStringExtra(EXTRA_PREDICTION)
+        val probability = intent.getStringExtra(EXTRA_PROBABILITY)
+        binding.tvPrediction.text = prediction
+    }
+    private fun setupRecyclerView() {
+        // Get dummy data
+        val dummyData = DrugAdapterDummyData().getDummyData()
 
+        // Initialize RecyclerView
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvProducts.layoutManager = layoutManager
+
+        // Initialize adapter with dummy data
+        val adapter = DrugAdapter()
+        adapter.submitList(dummyData)
+
+        // Set adapter to RecyclerView
+        binding.rvProducts.adapter = adapter
+
+        // Handle item click
+        adapter.setOnItemClickCallback(object : DrugAdapter.OnItemClickCallback {
+            override fun onItemClicked(product: Product) {
+                // Handle item click action here
+                Toast.makeText(this@ResultActivity, "Clicked: ${product.name}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
     private fun setIntentImage() {
         val imagePath = intent.getStringExtra(EXTRA_FILE)
         val result = BitmapFactory.decodeFile(imagePath)
@@ -33,7 +66,6 @@ class ResultActivity : AppCompatActivity() {
         val roundedBitmap = getRoundedCornerBitmap(resizedBitmap, 20)
         binding.ivSkinDetection.setImageBitmap(roundedBitmap)
     }
-
     private fun getRoundedCornerBitmap(bitmap: Bitmap, radius: Int): Bitmap {
         val output = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
         val canvas = android.graphics.Canvas(output)
@@ -54,5 +86,7 @@ class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_FILE = "extra_file"
+        const val EXTRA_PREDICTION = "extra_prediction"
+        const val EXTRA_PROBABILITY = "extra_probability"
     }
 }
