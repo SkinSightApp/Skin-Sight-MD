@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.skinsight.networking.api.ApiConfig
+import com.dicoding.skinsight.networking.response.CatalogProduct
+import com.dicoding.skinsight.networking.response.CatalogResponse
 import com.dicoding.skinsight.networking.response.LoginDataAccount
 import com.dicoding.skinsight.networking.response.PredictionData
 import com.dicoding.skinsight.networking.response.PredictionResponse
@@ -41,6 +43,15 @@ class MainViewModel : ViewModel() {
 
     private val _profile = MutableLiveData<User>()
     val profile: LiveData<User> = _profile
+
+
+    private val _isLoadingPredict = MutableLiveData<Boolean>()
+    val isLoadingPredict: LiveData<Boolean> = _isLoadingPredict
+    private val _isErrorPredict = MutableLiveData<Boolean>()
+    val isErrorPredict: LiveData<Boolean> = _isErrorPredict
+    private val _predictionResult = MutableLiveData<PredictionData>()
+    val predictionResult: LiveData<PredictionData> = _predictionResult
+
     fun getResponseLogin(loginDataAccount: LoginDataAccount) {
         _isLoadingLogin.value = true
         val api = ApiConfig.getApiService().loginUser(loginDataAccount)
@@ -120,24 +131,15 @@ class MainViewModel : ViewModel() {
         })
     }
 
-    // LiveData for loading state
-    private val _isLoadingPredict = MutableLiveData<Boolean>()
-    val isLoadingPredict: LiveData<Boolean> = _isLoadingPredict
 
-    // LiveData for error state
-    private val _isErrorPredict = MutableLiveData<Boolean>()
-    val isErrorPredict: LiveData<Boolean> = _isErrorPredict
-
-    // LiveData for prediction result
-    private val _predictionResult = MutableLiveData<PredictionData>()
-    val predictionResult: LiveData<PredictionData> = _predictionResult
-    fun getPrediction(file : File){
+    fun getPrediction(file: File) {
         val api = ApiConfig.getApiServicePredict().predict(
             MultipartBody.Part.createFormData(
                 "file",
                 file.name,
                 file.asRequestBody("image/*".toMediaTypeOrNull())
-            ))
+            )
+        )
         api.enqueue(object : retrofit2.Callback<PredictionResponse> {
             override fun onResponse(
                 call: Call<PredictionResponse>,
@@ -147,7 +149,7 @@ class MainViewModel : ViewModel() {
                     val responseBody = response.body()
                     if (responseBody != null) {
                         _predictionResult.value = responseBody.data
-                    }else{
+                    } else {
                         Log.d("Prediction Status", "Failed")
                     }
                 }
@@ -155,6 +157,51 @@ class MainViewModel : ViewModel() {
 
             override fun onFailure(call: Call<PredictionResponse>, t: Throwable) {
                 println("Error: ${t.message}")
+            }
+        })
+    }
+
+
+    private val _acneCatalog = MutableLiveData<List<CatalogProduct>>()
+    val acneCatalog: LiveData<List<CatalogProduct>> = _acneCatalog
+
+    private val _blackheadCatalog = MutableLiveData<List<CatalogProduct>>()
+    val blackheadCatalog: LiveData<List<CatalogProduct>> = _blackheadCatalog
+
+    private val _rednessCatalog = MutableLiveData<List<CatalogProduct>>()
+    val rednessCatalog: LiveData<List<CatalogProduct>> = _rednessCatalog
+
+    fun getProducts(token: String) {
+        _isLoadingPredict.value = true
+        val api = ApiConfig.getApiService().getCatalogs("Bearer $token")
+        api.enqueue(object : retrofit2.Callback<CatalogResponse> {
+            override fun onResponse(
+                call: Call<CatalogResponse>,
+                response: Response<CatalogResponse>
+            ) {
+                _isLoadingPredict.value = false
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        val catalogData = response.body()?.data
+                        catalogData?.redness?.let { rednessCategory ->
+                            _rednessCatalog.value = rednessCategory.products
+                        }
+                        catalogData?.acne?.let { acneCategory ->
+                            _acneCatalog.value = acneCategory.products
+                        }
+                        catalogData?.blackhead?.let { blackheadCategory ->
+                            _blackheadCatalog.value = blackheadCategory.products
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<CatalogResponse>, t: Throwable) {
+                _isLoadingPredict.value = false
+//                _isLoading.value = false
+//                isError = true
+//                _message.value = t.message.toString()
             }
         })
     }

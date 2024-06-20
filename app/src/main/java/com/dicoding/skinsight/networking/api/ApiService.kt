@@ -1,5 +1,6 @@
 package com.dicoding.skinsight.networking.api
 
+import com.dicoding.skinsight.networking.response.CatalogResponse
 import com.dicoding.skinsight.networking.response.LoginDataAccount
 import com.dicoding.skinsight.networking.response.PredictionResponse
 import com.dicoding.skinsight.networking.response.ProfileDataAccount
@@ -38,4 +39,9 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Header("Accept") acceptHeader: String = "application/json"
     ): Call<PredictionResponse>
+
+    @GET("catalogs")
+    fun getCatalogs(
+        @Header("Authorization") token: String,
+    ): Call<CatalogResponse>
 }

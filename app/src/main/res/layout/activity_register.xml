@@ -118,5 +118,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showPassword" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:indeterminate="true"
+        android:indeterminateTint="#FFFFFF"
+        android:indeterminateTintMode="src_in"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegisterAccount"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegisterAccount"
+        app:layout_constraintStart_toStartOf="@+id/btnRegisterAccount"
+        app:layout_constraintTop_toTopOf="@+id/btnRegisterAccount" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

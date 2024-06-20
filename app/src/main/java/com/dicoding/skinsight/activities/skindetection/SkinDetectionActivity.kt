@@ -79,6 +79,7 @@ class SkinDetectionActivity : AppCompatActivity() {
                 btnCheckSkin.visibility = View.VISIBLE
             }
             binding.btnCheckSkin.setOnClickListener {
+                mainViewModel.getPrediction(myFile)
                 mainViewModel.predictionResult.observe(this) {
                     val top2 = it.top_2
                     val top2String = top2.entries.firstOrNull()
@@ -94,6 +95,7 @@ class SkinDetectionActivity : AppCompatActivity() {
                     intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
                     intent.putExtra(ResultActivity.EXTRA_PREDICTION,top2String?.key)
                     startActivity(intent)
+                    finish()
                 }
 
             }
@@ -181,6 +183,7 @@ class SkinDetectionActivity : AppCompatActivity() {
                     intent.putExtra(ResultActivity.EXTRA_FILE, myFile.absolutePath)
                     intent.putExtra(ResultActivity.EXTRA_PREDICTION,top2String?.key)
                     startActivity(intent)
+                    finish()
                 }
 
             }

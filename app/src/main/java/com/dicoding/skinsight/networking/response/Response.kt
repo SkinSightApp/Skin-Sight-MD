@@ -60,13 +60,36 @@ data class PredictionData(
     val top_2: Map<String, Double>
 )
 
-data class Product(
-    val brand: String,
-    val name: String,
-    val price: String,
+
+data class CatalogResponse(
+    val status: String,
+    val message: String,
+    val data: CatalogData
+)
+
+data class CatalogData(
+    val redness: CatalogCategory,
+    val acne: CatalogCategory,
+    val blackhead: CatalogCategory
+)
+
+data class CatalogCategory(
+    val id: String,
+    val createdAt: String,
     val category: String,
-    val rating: Double,
+    val updatedAt: String,
+    val products: List<CatalogProduct>
+)
+
+data class CatalogProduct(
+    val id: String,
+    val createdAt: String,
     val reviews: Int,
+    val price: String,
+    val imageUrl: String,
+    val name: String,
+    val rating: Int,
+    val brand: String,
     val url: String,
-    val image_url: String
+    val updatedAt: String
 )
