@@ -4,10 +4,13 @@ This application leverages advanced machine learning algorithms to detect and di
 
 ## Features
 
-- Accurate detection of various skin problems
+- Accurate detection of 3 skin problems
 - Immediate feedback on uploaded images
 - Detailed Mendicin information about potential conditions, along with the link to the drug store
 - Accessible via Android phone
+
+- With a Catalogue of medicine that can be searched within the apps
+- and an accessible store page in which redirect to the store that sells the searched product
 ---
 
 ## How to Use
