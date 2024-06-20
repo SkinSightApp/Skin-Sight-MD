@@ -6,11 +6,8 @@ This application leverages advanced machine learning algorithms to detect and di
 
 - Accurate detection of various skin problems
 - Immediate feedback on uploaded images
-- Detailed information about potential conditions
-- Accessible via mobile and web platforms
-- Resources for treatment options
-- Connection with healthcare professionals
-
+- Detailed Mendicin information about potential conditions, along with the link to the drug store
+- Accessible via Android phone
 ---
 
 ## How to Use
@@ -18,6 +15,5 @@ This application leverages advanced machine learning algorithms to detect and di
 1. Upload an image of the skin issue.
 2. Receive immediate feedback and possible diagnoses.
 3. Access information and resources for managing the condition.
-4. Consult with a healthcare professional if necessary.
-
+4. A list of medicine will appear based on the classification of the skin problems and a link directly towards the store.
 ---
