@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
     private fun comingUpFeature() {
         val buttonClickListener = View.OnClickListener { view ->
             when (view.id) {
-                R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4 -> {
+                R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4 , R.id.btnCatalogue-> {
                     Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -89,6 +89,7 @@ class HomeActivity : AppCompatActivity() {
         binding.btn2.setOnClickListener(buttonClickListener)
         binding.btn3.setOnClickListener(buttonClickListener)
         binding.btn4.setOnClickListener(buttonClickListener)
+        binding.btnCatalogue.setOnClickListener(buttonClickListener)
 
     }
 }

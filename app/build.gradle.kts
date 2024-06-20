@@ -24,6 +24,7 @@ android {
         properties.load(project.rootProject.file("local.properties").inputStream())
         // Set API keys in BuildConfig
         buildConfigField("String", "API_URL", "\"${properties.getProperty("API_URL")}\"")
+        buildConfigField("String", "API_URL_PREDICTION", "\"${properties.getProperty("API_URL_PREDICTION")}\"")
         buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
     }
 
@@ -67,6 +68,6 @@ dependencies {
 
     // Preference
     implementation("androidx.datastore:datastore-preferences:1.1.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
 }

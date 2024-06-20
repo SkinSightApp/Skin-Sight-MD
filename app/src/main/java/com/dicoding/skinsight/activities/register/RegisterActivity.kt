@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +53,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        mainViewModel.isLoadingRegister.observe(this) { isLoading ->
+            binding.btnRegisterAccount.text = if (isLoading) "" else "Register"
+            binding.progressBar.visibility = (if (isLoading) View.VISIBLE else View.GONE)
+        }
         mainViewModel.statusRegister.observe(this) { statusRegister ->
             handleRegisterResponse(
                 mainViewModel.isErrorRegist,
