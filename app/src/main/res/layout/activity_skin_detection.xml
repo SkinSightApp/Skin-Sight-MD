@@ -114,18 +114,20 @@
         android:id="@+id/btnCheckSkin"
         android:layout_width="350dp"
         android:layout_height="55dp"
-        android:fontFamily="@font/nunito_semibold"
-        android:text="Check"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:visibility="invisible"
-        app:backgroundTint="@null"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/white"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Check"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivSkinDetection" />
+        app:layout_constraintTop_toBottomOf="@+id/ivSkinDetection"
+        app:layout_constraintVertical_bias="0.299" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

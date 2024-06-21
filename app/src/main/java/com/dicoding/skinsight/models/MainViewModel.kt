@@ -18,6 +18,8 @@ import com.dicoding.skinsight.networking.response.User
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import java.io.File
@@ -88,15 +90,32 @@ class MainViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     isErrorRegist = false
                     _statusRegister.value = response.body()?.status.toString()
+                    _messageRegister.value = response.body()?.message.toString()
+                    Log.d("MainViewModel", "Registration successful: ${response.body()?.message}")
                 } else {
                     isErrorRegist = true
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = if (errorBody != null && errorBody.isNotEmpty()) {
+                        try {
+                            JSONObject(errorBody).getString("message")
+                        } catch (e: JSONException) {
+                            "Registration failed"
+                        }
+                    } else {
+                        "Registration failed"
+                    }
+                    _statusRegister.value = errorMessage
+                    _messageRegister.value = errorMessage
+                    Log.d("MainViewModel", "Registration failed: $errorMessage")
                 }
             }
+
 
             override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
                 isErrorRegist = true
                 _isLoadingRegister.value = false
                 _statusRegister.value = "Error message: " + t.message.toString()
+                Log.d("MainViewModel", "Registration error: ${t.message}")
             }
         })
     }

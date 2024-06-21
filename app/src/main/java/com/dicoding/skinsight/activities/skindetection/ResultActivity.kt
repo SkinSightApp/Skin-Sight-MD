@@ -69,13 +69,11 @@ class ResultActivity : AppCompatActivity() {
                     setupRecyclerView(it)
                 }
             }
-
             "Acne" -> {
                 mainViewModel.acneCatalog.observe(this) {
                     setupRecyclerView(it)
                 }
             }
-
             "Blackhead" -> {
                 mainViewModel.blackheadCatalog.observe(this) {
                     setupRecyclerView(it)
