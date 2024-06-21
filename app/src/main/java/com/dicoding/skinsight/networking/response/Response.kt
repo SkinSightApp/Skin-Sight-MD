@@ -88,7 +88,7 @@ data class CatalogProduct(
     val price: String,
     val imageUrl: String,
     val name: String,
-    val rating: Int,
+    val rating: Float,  // Diubah dari Int ke Float
     val brand: String,
     val url: String,
     val updatedAt: String
